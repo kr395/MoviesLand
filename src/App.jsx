@@ -9,19 +9,27 @@ const API_URL = "https://omdbapi.com?apikey=f3f5cc76";
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const movieNames = ["Bat Man","Eternals","Spider Man","Ant Man","Iron Man","The Lion King","Raya","Toy Story","The Incredible","Deadpool"];
+  console.log(movieNames.length);
   const searchName = async (name) => {
     const response = await fetch(`${API_URL}&s=${name}`);
     const data = await response.json();
     setMovies(data.Search);
   };
-
   useEffect(() => {
-    searchName("Spider Man");
+    const randomNumber = Math.floor(Math.random()*10);
+    searchName(movieNames[randomNumber]);
+    
   }, []);
 
+
   return (
+    
     <div className="app">
-      <h1>MovieLand</h1>
+      <h1 id="homelogo" onClick={()=>{
+        const randomNumber = Math.floor(Math.random()*10);
+    searchName(movieNames[randomNumber]);
+      }}>MovieLand</h1>
       <div className="search">
         <input
           placeholder="Search Movies"
